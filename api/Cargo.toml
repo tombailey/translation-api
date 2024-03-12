@@ -1,0 +1,30 @@
+[package]
+name = "api"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+claude = { path = "../claude" }
+deepl = { path = "../deepl" }
+env = { path = "../env" }
+translation = { path = "../translation" }
+
+actix-web = { workspace = true }
+anyhow = { workspace = true }
+async-trait = { workspace = true }
+env_logger = { workspace = true }
+itertools = { workspace = true }
+log = { workspace = true }
+reqwest = { workspace = true }
+reqwest-retry-after = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+
+[dev-dependencies]
+actix-rt = { workspace = true }
+actix-http = { workspace = true }
+actix-service = { workspace = true }
