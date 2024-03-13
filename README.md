@@ -12,6 +12,9 @@ FROM tombailey256/translation-api:0.0.0
 ENV PORT = 8080
 ```
 
+See Docker Hub for the latest release tags:
+[https://hub.docker.com/r/tombailey256/translation-api](https://hub.docker.com/r/tombailey256/translation-api)
+
 ## Rest API
 
 ### Translate
