@@ -290,7 +290,7 @@ checksum = "5ad32ce52e4161730f7098c077cd2ed6229b5804ccf99e5366be1ab72a98b4e1"
 
 [[package]]
 name = "api"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "actix-http",
  "actix-rt",
@@ -304,6 +304,7 @@ dependencies = [
  "env_logger",
  "itertools",
  "log",
+ "openai",
  "reqwest",
  "reqwest-retry-after",
  "serde",
@@ -1080,6 +1081,20 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3fdb12b2476b595f9358c5161aa467c2438859caa136dec86c26fdd2efe17b92"
 
 [[package]]
+name = "openai"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "reqwest",
+ "reqwest-middleware",
+ "reqwest-retry-after",
+ "serde",
+ "serde_json",
+ "thiserror",
+ "tokio",
+]
+
+[[package]]
 name = "openssl"
 version = "0.10.64"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1730,6 +1745,7 @@ dependencies = [
  "deepl",
  "futures",
  "itertools",
+ "openai",
  "serde",
  "serde_json",
  "thiserror",

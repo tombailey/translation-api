@@ -1,5 +1,5 @@
 [workspace]
-members = [ "api", "claude", "deepl", "translation"]
+members = [ "api", "claude", "deepl", "openai", "translation"]
 resolver = "2"
 
 [workspace.dependencies]
