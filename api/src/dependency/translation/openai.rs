@@ -1,5 +1,5 @@
-use openai::client::{OpenAIClient, OpenAIModel};
 use env::require_env_var;
+use openai::client::{OpenAIClient, OpenAIModel};
 use translation::openai::OpenAITranslationProvider;
 
 pub const OPENAI_MODEL: &str = "OPENAI_MODEL";

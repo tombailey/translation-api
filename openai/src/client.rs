@@ -136,7 +136,8 @@ impl OpenAIClient {
                 .message
                 .content),
             _ => Err(OpenAIError::UnexpectedApiResponse(
-                format!("Expected 200 from {CHAT_COMPLETION_API_ENDPOINT} but got {status}").to_owned(),
+                format!("Expected 200 from {CHAT_COMPLETION_API_ENDPOINT} but got {status}")
+                    .to_owned(),
             )),
         }
     }
