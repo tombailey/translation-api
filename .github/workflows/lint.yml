@@ -1,0 +1,31 @@
+name: Lint
+
+on:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly-2024-03-01
+          override: true
+          components: clippy
+
+      - run: cargo clippy -- --deny warnings
+  unused-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly-2024-03-01
+          override: true
+          components: clippy
+
+      - run: cargo install cargo-udeps --locked
+      - run: cargo udeps
