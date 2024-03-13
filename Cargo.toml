@@ -1,0 +1,22 @@
+[workspace]
+members = [ "api", "claude", "deepl", "translation"]
+resolver = "2"
+
+[workspace.dependencies]
+actix-http = "3.3.1"
+actix-rt = "2.8.0"
+actix-service = "2.0.2"
+actix-web = "4"
+anyhow = "1.0.75"
+async-trait = "0.1.77"
+env_logger = "0.11.3"
+futures = "0.3.29"
+itertools = "0.12.0"
+log = "0.4.21"
+reqwest = "0.11.22"
+reqwest-middleware = "0.2.4"
+reqwest-retry-after = "0.1.1"
+serde = { version = "1.0.144", features = ["derive"] }
+serde_json = "1"
+thiserror = "1.0.57"
+tokio = { version = "1.24", features = ["sync"] }
