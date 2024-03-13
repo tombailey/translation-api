@@ -5,8 +5,6 @@ edition = "2021"
 
 [dependencies]
 async-trait = { workspace = true }
-futures = { workspace = true }
-itertools = { workspace = true }
 reqwest = { workspace = true }
 reqwest-middleware = { workspace = true }
 reqwest-retry-after = { workspace = true }

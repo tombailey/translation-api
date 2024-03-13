@@ -435,8 +435,6 @@ name = "claude"
 version = "0.1.0"
 dependencies = [
  "async-trait",
- "futures",
- "itertools",
  "reqwest",
  "reqwest-middleware",
  "reqwest-retry-after",
@@ -1730,7 +1728,6 @@ dependencies = [
  "async-trait",
  "claude",
  "deepl",
- "env",
  "futures",
  "itertools",
  "serde",

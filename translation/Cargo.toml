@@ -8,7 +8,6 @@ edition = "2021"
 [dependencies]
 claude = { path = "../claude" }
 deepl = { path = "../deepl" }
-env = { path = "../env" }
 
 async-trait = { workspace = true }
 futures = { workspace = true }
