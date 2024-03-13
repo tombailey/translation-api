@@ -2,9 +2,11 @@
 
 pub mod claude;
 pub mod deepl;
+pub mod openai;
 
 use ::claude::error::ClaudeError;
 use ::deepl::error::DeepLError;
+use ::openai::error::OpenAIError;
 use async_trait::async_trait;
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
@@ -33,6 +35,8 @@ pub enum TranslationError {
     ClaudeError(#[from] ClaudeError),
     #[error("DeepLError {0}")]
     DeepLError(#[from] DeepLError),
+    #[error("OpenAIError {0}")]
+    OpenAIError(#[from] OpenAIError),
 }
 
 pub trait Translation {
