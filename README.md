@@ -33,10 +33,9 @@ Uses a [Claude model](https://docs.anthropic.com/claude/docs/models-overview) fo
 ```shell
 export CLAUDE_API_KEY="..."
 export CLAUDE_API_VERSION="2023-06-01"
-export CLAUDE_MAX_PARALLEL_REQUESTS="3"
 export CLAUDE_MODEL="claude-3-sonnet-20240229"
+export CLAUDE_MAX_PARALLEL_REQUESTS="3"
 ```
-
 
 ### DeepL
 
@@ -46,6 +45,16 @@ Uses [DeepL](https://www.deepl.com/pro-api?cta=header-pro-api) for translation.
 export DEEPL_API="https://api-free.deepl.com/v2"
 export DEEPL_AUTHENTICATION_KEY="..."
 export DEEPL_MAX_PARALLEL_REQUESTS="3"
+```
+
+### OpenAI
+
+Uses an [OpenAI model](https://platform.openai.com/docs/models/gpt-4-and-gpt-4-turbo) for translation.
+
+```shell
+export OPENAI_API_KEY="..."
+export OPENAI_MODEL="gpt-4-turbo-preview"
+export OPENAI_MAX_PARALLEL_REQUESTS="3"
 ```
 
 ## Health check
