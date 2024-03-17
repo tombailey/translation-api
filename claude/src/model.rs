@@ -6,6 +6,8 @@ pub enum ClaudeModel {
     Claude3Opus,
     #[serde(rename = "claude-3-sonnet-20240229")]
     Claude3Sonnet,
+    #[serde(rename = "claude-3-haiku-20240307")]
+    Claude3Haiku,
     #[serde(rename = "claude-2.1")]
     Claude2Point1,
     #[serde(rename = "claude-2.0")]
