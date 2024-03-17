@@ -19,6 +19,4 @@ pub enum ClaudeError {
     UnexpectedApiResponse(String),
     #[error("Invalid api key")]
     InvalidApiKey,
-    #[error("Invalid model")]
-    InvalidModel,
 }
