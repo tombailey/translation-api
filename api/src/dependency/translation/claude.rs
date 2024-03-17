@@ -1,4 +1,5 @@
-use claude::client::{ClaudeClient, ClaudeModel};
+use claude::client::ClaudeClient;
+use claude::model::ClaudeModel;
 use env::require_env_var;
 use translation::claude::ClaudeTranslationProvider;
 
