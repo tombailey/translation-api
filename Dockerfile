@@ -6,6 +6,7 @@ COPY ./api ./api
 COPY ./claude ./claude
 COPY ./deepl ./deepl
 COPY ./env ./env
+COPY ./openai ./openai
 COPY ./translation ./translation
 COPY Cargo.toml Cargo.toml
 COPY Cargo.lock Cargo.lock
