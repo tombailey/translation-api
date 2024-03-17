@@ -1,7 +1,6 @@
-use serde::{Deserialize, Serialize};
-use crate::error::ClaudeError;
+use serde_enum_str::{Deserialize_enum_str, Serialize_enum_str};
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize_enum_str, Serialize_enum_str, PartialEq, Eq)]
 pub enum ClaudeModel {
     #[serde(rename = "claude-3-opus-20240229")]
     Claude3Opus,
@@ -15,17 +14,31 @@ pub enum ClaudeModel {
     ClaudeInstant1Point2,
 }
 
-impl TryFrom<String> for ClaudeModel {
-    type Error = ClaudeError;
+#[cfg(test)]
+mod tests {
+    use crate::model::ClaudeModel;
 
-    fn try_from(value: String) -> Result<Self, Self::Error> {
-        match value.to_ascii_lowercase().as_ref() {
-            "claude-3-opus-20240229" => Ok(ClaudeModel::Claude3Opus),
-            "claude-3-sonnet-20240229" => Ok(ClaudeModel::Claude3Sonnet),
-            "claude-2.1" => Ok(ClaudeModel::Claude2Point1),
-            "claude-2.0" => Ok(ClaudeModel::Claude2Point0),
-            "claude-instant-1.2" => Ok(ClaudeModel::ClaudeInstant1Point2),
-            _ => Err(ClaudeError::InvalidModel),
-        }
+    #[test]
+    fn it_should_get_models_from_string() {
+        assert_eq!(
+            ClaudeModel::try_from("claude-3-opus-20240229".to_owned()).unwrap(),
+            ClaudeModel::Claude3Opus
+        );
+        assert_eq!(
+            ClaudeModel::try_from("claude-3-sonnet-20240229".to_owned()).unwrap(),
+            ClaudeModel::Claude3Sonnet
+        );
+        assert_eq!(
+            ClaudeModel::try_from("claude-2.1".to_owned()).unwrap(),
+            ClaudeModel::Claude2Point1
+        );
+        assert_eq!(
+            ClaudeModel::try_from("claude-2.0".to_owned()).unwrap(),
+            ClaudeModel::Claude2Point0
+        );
+        assert_eq!(
+            ClaudeModel::try_from("claude-instant-1.2".to_owned()).unwrap(),
+            ClaudeModel::ClaudeInstant1Point2
+        );
     }
 }

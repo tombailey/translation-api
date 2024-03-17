@@ -1,10 +1,10 @@
 use crate::error::ClaudeError;
+use crate::model::ClaudeModel;
 use reqwest::StatusCode;
 use reqwest_retry_after::RetryAfterMiddleware;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use tokio::sync::Semaphore;
-use crate::model::ClaudeModel;
 
 const API: &str = "https://api.anthropic.com/v1";
 
