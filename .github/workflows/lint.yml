@@ -27,5 +27,6 @@ jobs:
           override: true
           components: clippy
 
-      - run: cargo install cargo-udeps --locked
+      - run: cargo install cargo-binstall
+      - run: cargo binstall cargo-udeps --locked
       - run: cargo udeps
