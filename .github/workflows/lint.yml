@@ -15,7 +15,7 @@ jobs:
           override: true
           components: clippy
 
-      - run: cargo clippy -- --deny warnings
+      - run: cargo clippy -- --allow async-fn-in-trait --deny warnings
   unused-dependencies:
     runs-on: ubuntu-latest
     steps:
