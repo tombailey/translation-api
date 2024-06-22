@@ -7,6 +7,10 @@ use tokio::sync::Semaphore;
 
 #[derive(Deserialize, Serialize)]
 pub enum OpenAIModel {
+    #[serde(rename = "gpt-4o")]
+    GPT4O,
+    #[serde(rename = "gpt-4o-2024-05-13")]
+    GPT4O20240513,
     #[serde(rename = "gpt-4-turbo-preview")]
     GPT4TurboPreview,
     #[serde(rename = "gpt-4-0125-preview")]
@@ -26,6 +30,8 @@ impl TryFrom<String> for OpenAIModel {
 
     fn try_from(value: String) -> Result<Self, Self::Error> {
         match value.to_ascii_lowercase().as_ref() {
+            "gpt-4o-2024-05-13" => Ok(OpenAIModel::GPT4O20240513),
+            "gpt-4o" => Ok(OpenAIModel::GPT4O),
             "gpt-4-turbo-preview" => Ok(OpenAIModel::GPT4TurboPreview),
             "gpt-4-0125-preview" => Ok(OpenAIModel::GPT40125Preview),
             "gpt-4" => Ok(OpenAIModel::GPT4),
