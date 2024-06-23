@@ -1,47 +1,10 @@
 use crate::error::OpenAIError;
+use crate::model::OpenAIModel;
 use reqwest::StatusCode;
 use reqwest_retry_after::RetryAfterMiddleware;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use tokio::sync::Semaphore;
-
-#[derive(Deserialize, Serialize)]
-pub enum OpenAIModel {
-    #[serde(rename = "gpt-4o")]
-    GPT4O,
-    #[serde(rename = "gpt-4o-2024-05-13")]
-    GPT4O20240513,
-    #[serde(rename = "gpt-4-turbo-preview")]
-    GPT4TurboPreview,
-    #[serde(rename = "gpt-4-0125-preview")]
-    GPT40125Preview,
-    #[serde(rename = "gpt-4")]
-    GPT4,
-    #[serde(rename = "gpt-4-32k")]
-    GPT432K,
-    #[serde(rename = "gpt-3.5-turbo")]
-    GPT3Point5Turbo,
-    #[serde(rename = "gpt-3.5-turbo-1106")]
-    GPT3Point5Turbo1106,
-}
-
-impl TryFrom<String> for OpenAIModel {
-    type Error = OpenAIError;
-
-    fn try_from(value: String) -> Result<Self, Self::Error> {
-        match value.to_ascii_lowercase().as_ref() {
-            "gpt-4o-2024-05-13" => Ok(OpenAIModel::GPT4O20240513),
-            "gpt-4o" => Ok(OpenAIModel::GPT4O),
-            "gpt-4-turbo-preview" => Ok(OpenAIModel::GPT4TurboPreview),
-            "gpt-4-0125-preview" => Ok(OpenAIModel::GPT40125Preview),
-            "gpt-4" => Ok(OpenAIModel::GPT4),
-            "gpt-4-32k" => Ok(OpenAIModel::GPT432K),
-            "gpt-3.5-turbo" => Ok(OpenAIModel::GPT3Point5Turbo),
-            "gpt-3.5-turbo-1106" => Ok(OpenAIModel::GPT3Point5Turbo1106),
-            _ => Err(OpenAIError::InvalidModel),
-        }
-    }
-}
 
 pub struct OpenAIClient {
     model: OpenAIModel,
