@@ -3,14 +3,8 @@ use crate::AppState;
 use actix_web::http::header::ContentType;
 use actix_web::{get, web, HttpResponse};
 use log::warn;
-use serde::Serialize;
 use serde_json::json;
 use translation::HealthCheck;
-
-#[derive(Serialize)]
-struct Healthy {
-    status: String,
-}
 
 #[get("/health")]
 pub async fn get_health(app_state: web::Data<AppState<Translator>>) -> HttpResponse {
