@@ -1131,6 +1131,7 @@ dependencies = [
  "reqwest-middleware",
  "reqwest-retry-after",
  "serde",
+ "serde-enum-str",
  "serde_json",
  "thiserror",
  "tokio",
