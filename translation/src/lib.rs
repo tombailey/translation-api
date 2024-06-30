@@ -11,6 +11,7 @@ use async_trait::async_trait;
 use derive_more::Display;
 use serde::{Deserialize, Serialize};
 use serde_with::DeserializeFromStr;
+use std::fmt::{Display, Formatter};
 use std::str::FromStr;
 use thiserror::Error;
 
@@ -31,12 +32,14 @@ impl FromStr for Language {
     }
 }
 
-impl Language {
-    fn to_string(&self) -> String {
-        self.0
+impl Display for Language {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        let serialized = self
+            .0
             .to_639_1()
             .map(str::to_owned)
-            .unwrap_or(self.0.to_string())
+            .unwrap_or(self.0.to_string());
+        f.write_str(&serialized)
     }
 }
 
