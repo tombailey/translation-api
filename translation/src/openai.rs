@@ -40,7 +40,7 @@ impl Translation for OpenAITranslationProvider {
                     );
                     let system_prompt = format!(
                         "Please translate the user's text{from_source} to {}, only respond with the translation",
-                        input.target_language.to_string()
+                        input.target_language
                     );
                     self.open_ai_client.respond_to(system_prompt, input.text, None)
                 })
