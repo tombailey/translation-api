@@ -1,5 +1,5 @@
 use crate::{
-    HealthCheck, Translation, TranslationError, TranslationInput, TranslationOutput,
+    HealthCheck, Language, Translation, TranslationError, TranslationInput, TranslationOutput,
     TranslationProvider,
 };
 use async_trait::async_trait;
@@ -9,6 +9,7 @@ use futures::TryFutureExt;
 use itertools::Itertools;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
+use std::str::FromStr;
 
 pub struct DeepLTranslationProvider {
     deepl_client: DeepLClient,
@@ -29,8 +30,10 @@ struct LanguageTranslationPair {
 impl From<TranslationInput> for LanguageTranslationPair {
     fn from(translation_input: TranslationInput) -> Self {
         LanguageTranslationPair {
-            source_lang: translation_input.source_language,
-            target_lang: translation_input.target_language,
+            source_lang: translation_input
+                .source_language
+                .map(|source| Language::to_string(&source)),
+            target_lang: translation_input.target_language.to_string(),
         }
     }
 }
@@ -100,7 +103,10 @@ impl Translation for DeepLTranslationProvider {
             .sorted_by(|first, second| first.1.cmp(&second.1))
             .map(|(text, _, source_language)| TranslationOutput {
                 text,
-                source_language,
+                source_language: match source_language {
+                    None => None,
+                    Some(source) => Language::from_str(source.to_ascii_lowercase().as_str()).ok(),
+                },
             })
             .collect_vec())
     }

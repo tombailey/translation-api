@@ -1,5 +1,5 @@
 use crate::{
-    HealthCheck, Translation, TranslationError, TranslationInput, TranslationOutput,
+    HealthCheck, Language, Translation, TranslationError, TranslationInput, TranslationOutput,
     TranslationProvider,
 };
 use async_trait::async_trait;
@@ -35,10 +35,13 @@ impl Translation for ClaudeTranslationProvider {
             inputs
                 .into_iter()
                 .map(|input| {
-                    let from_source = format!(" from {}", input.source_language.unwrap_or("".to_owned()));
+                    let from_source = format!(
+                        " from {}",
+                        input.source_language.map(|source| Language::to_string(&source)).unwrap_or("".to_owned())
+                    );
                     let prompt = format!(
                         "Please translate the following text{from_source} to {}, only respond with the translation:\n{}",
-                        input.target_language, input.text
+                        input.target_language.to_string(), input.text
                     );
                     self.claude_client.respond_to(prompt, None)
                 })
