@@ -41,7 +41,7 @@ impl Translation for ClaudeTranslationProvider {
                     );
                     let prompt = format!(
                         "Please translate the following text{from_source} to {}, only respond with the translation:\n{}",
-                        input.target_language.to_string(), input.text
+                        input.target_language, input.text
                     );
                     self.claude_client.respond_to(prompt, None)
                 })
