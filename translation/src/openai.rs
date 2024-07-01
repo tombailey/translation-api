@@ -1,5 +1,5 @@
 use crate::{
-    HealthCheck, Translation, TranslationError, TranslationInput, TranslationOutput,
+    HealthCheck, Language, Translation, TranslationError, TranslationInput, TranslationOutput,
     TranslationProvider,
 };
 use async_trait::async_trait;
@@ -34,7 +34,10 @@ impl Translation for OpenAITranslationProvider {
             inputs
                 .into_iter()
                 .map(|input| {
-                    let from_source = format!(" from {}", input.source_language.unwrap_or("".to_owned()));
+                    let from_source = format!(
+                        " from {}",
+                        input.source_language.map(|source| Language::to_string(&source)).unwrap_or("".to_owned())
+                    );
                     let system_prompt = format!(
                         "Please translate the user's text{from_source} to {}, only respond with the translation",
                         input.target_language

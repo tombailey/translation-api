@@ -8,17 +8,49 @@ use ::claude::error::ClaudeError;
 use ::deepl::error::DeepLError;
 use ::openai::error::OpenAIError;
 use async_trait::async_trait;
+use derive_more::Display;
 use serde::{Deserialize, Serialize};
+use serde_with::DeserializeFromStr;
+use std::fmt::{Display, Formatter};
+use std::str::FromStr;
 use thiserror::Error;
+
+#[derive(Clone, Debug, DeserializeFromStr, Serialize)]
+pub struct Language(isolang::Language);
+
+#[derive(Debug, Display)]
+pub struct LanguageError;
+
+impl FromStr for Language {
+    type Err = LanguageError;
+
+    fn from_str(value: &str) -> Result<Self, Self::Err> {
+        isolang::Language::from_str(value)
+            .or(isolang::Language::from_name(value).ok_or(LanguageError))
+            .map(Language)
+            .map_err(|_| LanguageError)
+    }
+}
+
+impl Display for Language {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        let serialized = self
+            .0
+            .to_639_1()
+            .map(str::to_owned)
+            .unwrap_or(self.0.to_string());
+        f.write_str(&serialized)
+    }
+}
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct TranslationInput {
     #[serde(rename = "input")]
     text: String,
     #[serde(rename = "source")]
-    source_language: Option<String>,
+    source_language: Option<Language>,
     #[serde(rename = "target")]
-    target_language: String,
+    target_language: Language,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -26,7 +58,8 @@ pub struct TranslationOutput {
     #[serde(rename = "output")]
     text: String,
     #[serde(rename = "source")]
-    source_language: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    source_language: Option<Language>,
 }
 
 #[derive(Error, Debug)]
