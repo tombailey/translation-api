@@ -15,7 +15,7 @@ jobs:
           override: true
           components: clippy
 
-      - run: cargo clippy -- --allow async-fn-in-trait --deny warnings
+      - run: cargo +nightly-2024-03-01 clippy -- --allow async-fn-in-trait --deny warnings
   unused-dependencies:
     runs-on: ubuntu-latest
     steps:
@@ -27,6 +27,6 @@ jobs:
           override: true
           components: clippy
 
-      - run: cargo install cargo-binstall@1.6.9
-      - run: cargo binstall --no-confirm cargo-udeps --locked
-      - run: cargo udeps
+      - run: cargo +nightly-2024-03-01 install cargo-binstall@1.6.9
+      - run: cargo +nightly-2024-03-01 binstall --no-confirm cargo-udeps --locked
+      - run: cargo +nightly-2024-03-01 udeps
