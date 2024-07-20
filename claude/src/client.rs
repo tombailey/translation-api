@@ -1,7 +1,8 @@
 use crate::error::ClaudeError;
 use crate::model::ClaudeModel;
 use reqwest::StatusCode;
-use reqwest_retry_after::RetryAfterMiddleware;
+use reqwest_retry::policies::ExponentialBackoff;
+use reqwest_retry::RetryTransientMiddleware;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use tokio::sync::Semaphore;
@@ -37,8 +38,9 @@ impl ClaudeClient {
             .default_headers(default_headers)
             .build()?;
 
+        let retry_policy = ExponentialBackoff::builder().build_with_max_retries(3);
         let client_with_middleware = reqwest_middleware::ClientBuilder::new(client)
-            .with(RetryAfterMiddleware::new())
+            .with(RetryTransientMiddleware::new_with_policy(retry_policy))
             .build();
 
         Ok(ClaudeClient {

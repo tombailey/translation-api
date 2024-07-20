@@ -2,7 +2,8 @@ use crate::error::DeepLError;
 use futures::future::join_all;
 use itertools::Itertools;
 use reqwest::StatusCode;
-use reqwest_retry_after::RetryAfterMiddleware;
+use reqwest_retry::policies::ExponentialBackoff;
+use reqwest_retry::RetryTransientMiddleware;
 use serde::{Deserialize, Serialize};
 use tokio::sync::Semaphore;
 
@@ -35,8 +36,9 @@ impl DeepLClient {
             .default_headers(default_headers)
             .build()?;
 
+        let retry_policy = ExponentialBackoff::builder().build_with_max_retries(3);
         let client_with_middleware = reqwest_middleware::ClientBuilder::new(client)
-            .with(RetryAfterMiddleware::new())
+            .with(RetryTransientMiddleware::new_with_policy(retry_policy))
             .build();
 
         Ok(DeepLClient {
