@@ -11,11 +11,11 @@ jobs:
 
       - uses: actions-rs/toolchain@v1
         with:
-          toolchain: nightly-2024-03-01
+          toolchain: nightly-2024-06-13
           override: true
           components: clippy
 
-      - run: cargo +nightly-2024-03-01 clippy -- --allow async-fn-in-trait --deny warnings
+      - run: cargo +nightly-2024-06-13 clippy -- --allow async-fn-in-trait --deny warnings
   unused-dependencies:
     runs-on: ubuntu-latest
     steps:
@@ -23,10 +23,10 @@ jobs:
 
       - uses: actions-rs/toolchain@v1
         with:
-          toolchain: nightly-2024-03-01
+          toolchain: nightly-2024-06-13
           override: true
           components: clippy
 
-      - run: cargo +nightly-2024-03-01 install cargo-binstall@1.6.9
-      - run: cargo +nightly-2024-03-01 binstall --no-confirm cargo-udeps --locked
-      - run: cargo +nightly-2024-03-01 udeps
+      - run: cargo +nightly-2024-06-13 install cargo-binstall@1.6.9
+      - run: cargo +nightly-2024-06-13 binstall --no-confirm cargo-udeps --locked
+      - run: cargo +nightly-2024-06-13 udeps
