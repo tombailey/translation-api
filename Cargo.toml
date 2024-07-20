@@ -2,6 +2,10 @@
 members = [ "api", "claude", "deepl", "openai", "translation"]
 resolver = "2"
 
+[profile.release]
+lto = true
+strip = "debuginfo"
+
 [workspace.dependencies]
 actix-http = "3.3.1"
 actix-rt = "2.8.0"
