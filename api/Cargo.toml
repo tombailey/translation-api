@@ -13,7 +13,6 @@ openai = { path = "../openai" }
 translation = { path = "../translation" }
 
 actix-web = { workspace = true }
-anyhow = { workspace = true }
 async-trait = { workspace = true }
 env_logger = { workspace = true }
 itertools = { workspace = true }

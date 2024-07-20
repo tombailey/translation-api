@@ -311,7 +311,6 @@ dependencies = [
  "actix-rt",
  "actix-service",
  "actix-web",
- "anyhow",
  "async-trait",
  "claude",
  "deepl",
