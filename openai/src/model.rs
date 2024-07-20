@@ -2,6 +2,10 @@ use serde_enum_str::{Deserialize_enum_str, Serialize_enum_str};
 
 #[derive(Debug, Deserialize_enum_str, Serialize_enum_str, PartialEq, Eq)]
 pub enum OpenAIModel {
+    #[serde(rename = "gpt-4o-mini")]
+    GPT4OMini,
+    #[serde(rename = "gpt-4o-mini-2024-07-18")]
+    GPT4OMini20240718,
     #[serde(rename = "gpt-4o")]
     GPT4O,
     #[serde(rename = "gpt-4o-2024-05-13")]
@@ -26,6 +30,14 @@ mod tests {
 
     #[test]
     fn it_should_get_models_from_string() {
+        assert_eq!(
+            OpenAIModel::try_from("gpt-4o-mini".to_owned()).unwrap(),
+            OpenAIModel::GPT4OMini
+        );
+        assert_eq!(
+            OpenAIModel::try_from("gpt-4o-mini-2024-07-18".to_owned()).unwrap(),
+            OpenAIModel::GPT4OMini20240718
+        );
         assert_eq!(
             OpenAIModel::try_from("gpt-4o".to_owned()).unwrap(),
             OpenAIModel::GPT4O
