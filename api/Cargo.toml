@@ -13,13 +13,10 @@ openai = { path = "../openai" }
 translation = { path = "../translation" }
 
 actix-web = { workspace = true }
-anyhow = { workspace = true }
 async-trait = { workspace = true }
 env_logger = { workspace = true }
 itertools = { workspace = true }
 log = { workspace = true }
-reqwest = { workspace = true }
-reqwest-retry-after = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 thiserror = { workspace = true }
