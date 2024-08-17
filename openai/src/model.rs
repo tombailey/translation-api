@@ -10,6 +10,8 @@ pub enum OpenAIModel {
     GPT4O,
     #[serde(rename = "gpt-4o-2024-05-13")]
     GPT4O20240513,
+    #[serde(rename = "gpt-4o-2024-08-06")]
+    GPT4O20240806,
     #[serde(rename = "gpt-4-turbo-preview")]
     GPT4TurboPreview,
     #[serde(rename = "gpt-4-0125-preview")]
@@ -45,6 +47,10 @@ mod tests {
         assert_eq!(
             OpenAIModel::try_from("gpt-4o-2024-05-13".to_owned()).unwrap(),
             OpenAIModel::GPT4O20240513
+        );
+        assert_eq!(
+            OpenAIModel::try_from("gpt-4o-2024-08-06".to_owned()).unwrap(),
+            OpenAIModel::GPT4O20240806
         );
         assert_eq!(
             OpenAIModel::try_from("gpt-4-turbo-preview".to_owned()).unwrap(),
