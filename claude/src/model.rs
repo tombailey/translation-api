@@ -2,6 +2,8 @@ use serde_enum_str::{Deserialize_enum_str, Serialize_enum_str};
 
 #[derive(Debug, Deserialize_enum_str, Serialize_enum_str, PartialEq, Eq)]
 pub enum ClaudeModel {
+    #[serde(rename = "claude-3-7-sonnet-20250219")]
+    Claude3Point7Sonnet20250219,
     #[serde(rename = "claude-3-5-sonnet-20241022")]
     Claude3Point5Sonnet20241022,
     #[serde(rename = "claude-3-5-sonnet-20240620")]
@@ -26,6 +28,10 @@ mod tests {
 
     #[test]
     fn it_should_get_models_from_string() {
+        assert_eq!(
+            ClaudeModel::try_from("claude-3-7-sonnet-20250219".to_owned()).unwrap(),
+            ClaudeModel::Claude3Point7Sonnet20250219
+        );
         assert_eq!(
             ClaudeModel::try_from("claude-3-5-sonnet-20241022".to_owned()).unwrap(),
             ClaudeModel::Claude3Point5Sonnet20241022
