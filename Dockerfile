@@ -1,4 +1,4 @@
-FROM clux/muslrust:nightly-2024-03-01 AS builder
+FROM clux/muslrust:nightly-2025-08-23 AS builder
 
 WORKDIR /app
 
